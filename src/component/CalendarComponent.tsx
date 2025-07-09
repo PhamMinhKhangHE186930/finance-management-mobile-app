@@ -47,7 +47,7 @@ function CalendarComponent() {
         // lấy data từ async storage và lặp qua từng phần tử
         transactionData.map((transaction: any) => {
             const key = transaction.date.split('T')[0];
-            const dot = expenseDot //transaction.category == 'expense' ? expenseDot : incomeDot;
+            const dot = transaction.category.type == 'expense' ? expenseDot : incomeDot;
 
             // kiểm tra date đã được khởi tạo hay chưa
             if (markedDateData[key]) {
@@ -56,7 +56,7 @@ function CalendarComponent() {
                 // thêm giá trị dot tương ứng vào data (expense/income)
                 markedDateData[key] = {
                     marked: true,
-                    dots: [expenseDot, incomeDot], // fixed => write dynamic check again
+                    dots: [transaction.category.type == 'expense' ? expenseDot : incomeDot],
                     activeOpacity: 0
                 }
             }
