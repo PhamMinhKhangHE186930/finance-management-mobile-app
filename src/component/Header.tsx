@@ -20,14 +20,22 @@ function Header({ headerType, segmentData }: HeaderProps) {
                 selectedIndex={segmentData?.selectedIndex ?? 0}
                 onChange={(e) => (segmentData?.onSegmentChange(e.nativeEvent.selectedSegmentIndex))}
                 tintColor="#007bff"
-                backgroundColor="#f1f1f1"
+                backgroundColor="rgb(227, 227, 227)"
                 fontStyle={{ color: "#007bff", fontWeight: 'bold' }}
                 activeFontStyle={{ color: "#f1f1f1" }}
             />
         ) : headerType == 'calendar' ? (
             <Text style={styles.calender}>Lịch</Text>
         ) : headerType == 'report' ? (
-            <Text>Lịch</Text>
+            <SegmentedControl
+                values={[segmentData?.firstValue ?? '', segmentData?.secondValue ?? '']}
+                selectedIndex={segmentData?.selectedIndex ?? 0}
+                onChange={(e) => (segmentData?.onSegmentChange(e.nativeEvent.selectedSegmentIndex))}
+                tintColor="#007bff"
+                backgroundColor="rgb(227, 227, 227)"
+                fontStyle={{ color: "#007bff", fontWeight: 'bold' }}
+                activeFontStyle={{ color: "#f1f1f1" }}
+            />
         ) : (
             <Text>Lịch</Text>
         )

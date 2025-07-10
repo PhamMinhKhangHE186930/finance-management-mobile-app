@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { ICategory } from '../dataset/category';
-import { API_URL } from '../utils/api';
 import { formatMoney, stringToNumberMoney } from '../utils/formatter';
 
 export const HomeScreenContext = createContext<any>(null);
@@ -15,6 +13,28 @@ function HomeScreenProvider({ children, amountType }: { children: any, amountTyp
 
     const [categories, setCategories] = useState<ICategory[]>([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+
+    const incomeCate: ICategory[] = [
+        { _id: "1", name: "Tiền lương", categoryIcon: 'wallet-outline', color: 'rgb(3, 162, 3)', type: 'income' },
+        { _id: "2", name: "Phụ cấp", categoryIcon: 'analytics-outline', color: 'rgb(255, 102, 255)', type: 'income' },
+        { _id: "3", name: "Tiền thưởng", categoryIcon: 'gift-outline', color: 'rgb(255, 51, 0)', type: 'income' },
+        { _id: "4", name: "Thu nhập phụ", categoryIcon: 'business-outline', color: 'rgb(3, 165, 205)', type: 'income' },
+        { _id: "5", name: "Đầu tư", categoryIcon: 'logo-bitcoin', color: 'rgb(247,147,26)', type: 'income' },
+        { _id: "6", name: "Thu nhập tạm thời", categoryIcon: 'hourglass-outline', color: 'rgb(204, 153, 255)', type: 'income' }
+    ];
+
+    const expenseCate: ICategory[] = [
+        { _id: "1", name: 'Ăn uống', categoryIcon: 'restaurant-outline', color: 'rgb(255, 137, 0)', type: 'expense' },
+        { _id: "2", name: 'Chi tiêu hàng tháng', categoryIcon: 'cash-outline', color: 'rgb(0, 102, 0)', type: 'expense' },
+        { _id: "3", name: 'Quần áo', categoryIcon: 'shirt-outline', color: 'rgb(0, 0, 204)', type: 'expense' },
+        { _id: "4", name: 'Mỹ phẩm', categoryIcon: 'eyedrop-outline', color: 'rgb(255, 51, 204)', type: 'expense' },
+        { _id: "5", name: 'Tiền nhà', categoryIcon: 'home-outline', color: 'rgb(255, 153, 0)', type: 'expense' },
+        { _id: "6", name: 'Y tế', categoryIcon: 'medkit-outline', color: 'rgb(0, 102, 0)', type: 'expense' },
+        { _id: "7", name: 'Giáo dục', categoryIcon: 'school-outline', color: 'rgb(255, 0, 0)', type: 'expense' },
+        { _id: "8", name: 'Tiền điện', categoryIcon: 'flash-outline', color: 'rgb(255, 216, 0)', type: 'expense' },
+        { _id: "9", name: 'Đi lại', categoryIcon: 'subway-outline', color: 'rgb(204, 136, 0)', type: 'expense' },
+        { _id: "10", name: 'Phí giao lưu', categoryIcon: 'beer-outline', color: 'rgb(255, 153, 0)', type: 'expense' }
+    ]
 
     const handleSaveTransaction = async () => {
         const data = {
@@ -73,10 +93,19 @@ function HomeScreenProvider({ children, amountType }: { children: any, amountTyp
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${API_URL}/category/getAllExpenseCategory/${amountType}`);
-                const responseData: ICategory[] = response.data.data
-                setCategories(responseData);
-                setSelectedCategory(responseData[0]._id);
+                if (amountType == 'income') {
+                    setCategories(incomeCate);
+                    setSelectedCategory(incomeCate[0]._id);
+                } else {
+                    setCategories(expenseCate);
+                    setSelectedCategory(expenseCate[0]._id);
+                }
+                // const response = await axios.get(`${API_URL}/category/getAllExpenseCategory/${amountType}`);
+                // const responseData: ICategory[] = response.data.data
+
+                // setCategories(responseData);
+                // setSelectedCategory(responseData[0]._id);
+
             } catch (error) {
 
             }

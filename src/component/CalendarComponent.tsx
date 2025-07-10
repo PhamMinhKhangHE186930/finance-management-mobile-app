@@ -39,6 +39,8 @@ function CalendarComponent() {
     } = useContext(CalendarScreenContext);
 
     // sử dụng usememo để tính toán lại date được đánh dấu và thêm các thuộc tính: date nào có input tiền chi/thu
+    // useMemo: gần tương tự useState, nhưng không cần setState, dùng để tối ưu hiệu suất bằng cách ghi nhớ (memorize) giá trị được tính toán, 
+    // để tránh việc tính toán lại không cần thiết mỗi lần component render.
     const mergeMarkedDateData = useMemo<MarkedDates>((): MarkedDates => {
         // khởi tạo giá trị trả về
         const markedDateData: MarkedDates = {};

@@ -32,8 +32,8 @@ function CalendarInformation() {
                     <Text style={{fontWeight: '600',}}>{formatDate('vi-VN', new Date(item[0].date))}</Text>
                     <Text style={{fontWeight: '600',}}>{formatMoney('vi-VN', totalAmountInMonth(item))}đ</Text>
                 </View>
-                {item.map((transaction: any) => (
-                    <View style={styles.transactionLine}>
+                {item.map((transaction: any, index: number) => (
+                    <View key={index} style={styles.transactionLine}>
                         <Ionicons style={{ flex: 1 }} name={transaction.category.categoryIcon as any} color={transaction.category.color} size={21} />
                         <Text style={{ flex: 10, fontSize: 17, paddingLeft: 5, fontWeight: '600' }}>{transaction.category.name} <Text style={{ fontSize: 12, fontWeight: '300' }}>({transaction.note})</Text></Text>
                         <Text style={{ flex: 2, fontSize: 17, fontWeight: '600', color: transaction.category.type === 'expense' ? '#ff0000' : '#007bff' }}>{transaction.category.type === 'expense' ? `-${formatMoney('vi-VN', transaction.amount)}` : formatMoney('vi-VN', transaction.amount)}đ</Text>

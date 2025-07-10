@@ -43,6 +43,7 @@ function CalendarScreenProvider({ children }: { children: any }) {
     );
 
     const filteredTransaction = transactionData.filter((transaction: any) => {
+        console.log('filter')
         const date = new Date(transaction.date)
         const monthFilter = date.getMonth() + 1 == month;
         const yearFilter = date.getFullYear() == year;
@@ -83,6 +84,7 @@ function CalendarScreenProvider({ children }: { children: any }) {
                 }
             }
         })
+        console.log(transactionGroup)
         setTransactionGroupDate(transactionGroup)
     }
 
