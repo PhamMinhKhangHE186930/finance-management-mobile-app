@@ -9,6 +9,16 @@ const formatDate = (location: string, date: Date): string => {
     return formatDate;
 }
 
+const formatMonthYear = (location: string, date: Date): string => {
+    const formatter = Intl.DateTimeFormat(location, {
+        month: '2-digit',
+        year: 'numeric'
+    });
+
+    const formatDate = formatter.format(date);
+    return formatDate.replace('tháng ', '').replace(',', '').replace(' ', '/').trim();
+}
+
 const formatMoney = (location: string, amount: number): string => {
     const formatter = Intl.NumberFormat(location, {
         maximumFractionDigits: 0,
@@ -27,4 +37,6 @@ const stringToNumberMoney = (amount: string): number => {
     return 0;
 }
 
-export { formatDate, formatMoney, stringToNumberMoney };
+
+export { formatDate, formatMoney, formatMonthYear, stringToNumberMoney };
+

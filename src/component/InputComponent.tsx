@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import React, { useContext, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { HomeScreenContext } from '../context/HomeScreenContext';
 import { formatDate } from '../utils/formatter';
 import CategorySelect from './CategorySelect';
@@ -35,7 +35,7 @@ function InputComponent() {
     };
 
     return (
-        <ScrollView>
+        <View>
             <View>
                 {/* input date */}
                 <View style={styles.dateCell}>
@@ -114,7 +114,7 @@ function InputComponent() {
                     </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

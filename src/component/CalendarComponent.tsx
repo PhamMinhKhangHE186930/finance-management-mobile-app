@@ -39,6 +39,8 @@ function CalendarComponent() {
     } = useContext(CalendarScreenContext);
 
     // sử dụng usememo để tính toán lại date được đánh dấu và thêm các thuộc tính: date nào có input tiền chi/thu
+    // useMemo: gần tương tự useState, nhưng không cần setState, dùng để tối ưu hiệu suất bằng cách ghi nhớ (memorize) giá trị được tính toán, 
+    // để tránh việc tính toán lại không cần thiết mỗi lần component render.
     const mergeMarkedDateData = useMemo<MarkedDates>((): MarkedDates => {
         // khởi tạo giá trị trả về
         const markedDateData: MarkedDates = {};
@@ -47,7 +49,7 @@ function CalendarComponent() {
         // lấy data từ async storage và lặp qua từng phần tử
         transactionData.map((transaction: any) => {
             const key = transaction.date.split('T')[0];
-            const dot = expenseDot //transaction.category == 'expense' ? expenseDot : incomeDot;
+            const dot = transaction.category.type == 'expense' ? expenseDot : incomeDot;
 
             // kiểm tra date đã được khởi tạo hay chưa
             if (markedDateData[key]) {
@@ -56,7 +58,7 @@ function CalendarComponent() {
                 // thêm giá trị dot tương ứng vào data (expense/income)
                 markedDateData[key] = {
                     marked: true,
-                    dots: [expenseDot, incomeDot], // fixed => write dynamic check again
+                    dots: [transaction.category.type == 'expense' ? expenseDot : incomeDot],
                     activeOpacity: 0
                 }
             }

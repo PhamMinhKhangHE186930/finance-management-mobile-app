@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CalenderScreen from '../screens/CalendarScreen';
 import HomeScreen from '../screens/HomeScreen';
+import OtherScreen from '../screens/OtherScreen';
 import StatisticScreen from '../screens/StatisticScreen';
 
 // khai bao Tab
@@ -45,7 +46,7 @@ function NavigationTabs() {
         />
         <Tab.Screen
             name='Other'
-            component={StatisticScreen}
+            component={OtherScreen}
             options={{
                 headerShown: false,
                 tabBarLabel: 'Khác',

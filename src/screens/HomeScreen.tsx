@@ -12,34 +12,21 @@ function HomeScreen() {
   const segmentData = {
     firstValue: 'Tiền chi',
     secondValue: 'Tiền thu',
-    selectedIndex: { selectedIndex },
-    onSegmentChange: { setSelectedIndex }
+    selectedIndex: selectedIndex,
+    onSegmentChange: setSelectedIndex
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Header
         headerType='home'
-        segmentData={
-          {
-            firstValue: 'Tiền chi',
-            secondValue: 'Tiền thu',
-            selectedIndex: selectedIndex,
-            onSegmentChange: setSelectedIndex
-          }
-        }
+        segmentData={segmentData}
       />
       <View style={styles.separator} />
 
-      {selectedIndex === 0 ? (
-        <HomeScreenProvider amountType={selectedIndex === 0 ? 'expense' : 'income'}>
-          <InputComponent />
-        </HomeScreenProvider>
-      ) : (
-        <HomeScreenProvider amountType={selectedIndex === 0 ? 'expense' : 'income'}>
-          <InputComponent />
-        </HomeScreenProvider>
-      )}
+      <HomeScreenProvider amountType={selectedIndex === 0 ? 'expense' : 'income'}>
+        <InputComponent />
+      </HomeScreenProvider>
     </SafeAreaView>
   )
 }
